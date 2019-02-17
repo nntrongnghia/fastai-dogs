@@ -3,6 +3,7 @@ from flask import Flask, render_template, flash, request, redirect,\
     url_for, send_from_directory
 from io import BytesIO
 from base64 import b64encode
+from fastai.vision import open_image, load_learner
 
 app = Flask(__name__)
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
@@ -35,7 +36,9 @@ def upload_file():
                 b64encode(im.getvalue()).decode('UTF-8')
             # === PREDICTION
             # - open image fastai from BytesIO im
+            im_fast = open_image(im)
             # - predict
+            print(model.predict(im_fast)[0])
             # - return class to a variable 'pred'
             # - change template html to display the predicted class
             return render_template('show_image.html', img_tag=img_tag)
@@ -43,4 +46,7 @@ def upload_file():
 
 
 if __name__ == '__main__':
+    print("Loading model...")
+    model = load_learner('./models')
+    print('Model loaded')
     app.run(debug=True)
