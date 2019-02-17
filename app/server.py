@@ -8,6 +8,7 @@ app = Flask(__name__)
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 app.secret_key = b'_5#y32L"F#^8z\n\xec]/'
 
+
 def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -30,17 +31,15 @@ def upload_file():
             filename = secure_filename(file.filename)
             print(filename)
             im = BytesIO(file.read())
-            img_tag = "data:image/png;base64," + b64encode(im.getvalue()).decode('UTF-8')
-            #=== PREDICTION
-            #- open image fastai from BytesIO im
-            #- predict
-            #- return class to a variable 'pred'
-            #- change template html to display the predicted class
+            img_tag = "data:image/png;base64," + \
+                b64encode(im.getvalue()).decode('UTF-8')
+            # === PREDICTION
+            # - open image fastai from BytesIO im
+            # - predict
+            # - return class to a variable 'pred'
+            # - change template html to display the predicted class
             return render_template('show_image.html', img_tag=img_tag)
     return render_template('upload.html')
-
-
-
 
 
 if __name__ == '__main__':
