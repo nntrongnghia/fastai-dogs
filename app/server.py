@@ -1,9 +1,10 @@
-from werkzeug.utils import secure_filename
+from fastai.vision import open_image, load_learner
+from base64 import b64encode
+from io import BytesIO
 from flask import Flask, render_template, flash, request, redirect,\
     url_for, send_from_directory
-from io import BytesIO
-from base64 import b64encode
-from fastai.vision import open_image, load_learner
+from werkzeug.utils import secure_filename
+print('Packages loaded!')
 
 app = Flask(__name__)
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
@@ -47,6 +48,10 @@ def upload_file():
 
 if __name__ == '__main__':
     print("Loading model...")
-    model = load_learner('./models')
+    try:
+        model = load_learner('./models')
+    except:
+        print('Model not found. Kill the program')
+   
     print('Model loaded')
     app.run(debug=True)
