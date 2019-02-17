@@ -1,4 +1,3 @@
-import os
 from werkzeug.utils import secure_filename
 from flask import Flask, render_template, flash, request, redirect,\
     url_for, send_from_directory
@@ -6,10 +5,8 @@ from io import BytesIO
 from base64 import b64encode
 
 app = Flask(__name__)
-UPLOAD_FOLDER = 'D://Python//google-app-dogs//app//uploads'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.secret_key = b'_5#y2L"F#^8z\n\xec]/'
+app.secret_key = b'_5#y32L"F#^8z\n\xec]/'
 
 def allowed_file(filename):
     return '.' in filename and \
