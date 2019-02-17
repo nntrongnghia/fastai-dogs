@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Uploaded image</h1>
+    {% if img_tag %}
+    <img src={{img_tag}} height="400">
+    <p>Predicted class</p>
+    {% else %}
+    <h2>Oopss</h2>
+    {% endif %}
+    
+</body>
+</html>
