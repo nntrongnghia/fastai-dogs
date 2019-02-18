@@ -4,6 +4,7 @@ from io import BytesIO
 from flask import Flask, render_template, flash, request, redirect,\
     url_for, send_from_directory
 from werkzeug.utils import secure_filename
+import os
 print('Packages loaded!')
 
 app = Flask(__name__)
@@ -49,9 +50,11 @@ def upload_file():
 if __name__ == '__main__':
     print("Loading model...")
     try:
-        model = load_learner('./models')
+        print(os.listdir('.'))
+        model = load_learner('./models', fname='export.pkl')
+        print('Model loaded')
     except:
         print('Model not found. Kill the program')
    
-    print('Model loaded')
+    
     app.run(debug=True)
