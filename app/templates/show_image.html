@@ -2,9 +2,9 @@
 <html>
 <body>
     <h1>Uploaded image</h1>
-    {% if img_tag %}
+    {% if img_tag and pred %}
     <img src={{img_tag}} height="400">
-    <p>Predicted class</p>
+    <p>Predicted class: {{pred}}</p>
     {% else %}
     <h2>Oopss</h2>
     {% endif %}

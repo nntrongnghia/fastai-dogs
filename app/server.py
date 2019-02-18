@@ -40,10 +40,10 @@ def upload_file():
             # - open image fastai from BytesIO im
             im_fast = open_image(im)
             # - predict
-            print(model.predict(im_fast)[0])
-            # - return class to a variable 'pred'
+            pred = model.predict(im_fast)[0]
+            print(pred)
             # - change template html to display the predicted class
-            return render_template('show_image.html', img_tag=img_tag)
+            return render_template('show_image.html', img_tag=img_tag, pred = pred)
     return render_template('upload.html')
 
 
@@ -54,7 +54,5 @@ if __name__ == '__main__':
         model = load_learner('./models', fname='export.pkl')
         print('Model loaded')
     except:
-        print('Model not found. Kill the program')
-   
-    
+        print('Fail to load the model. Kill the program')
     app.run(debug=True)
